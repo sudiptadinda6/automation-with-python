@@ -2,7 +2,16 @@ import time
 
 from getHrefOrTextOfProductLink import GetProductTextOrHref
 
-import selectorName 
+from facebookselectors import (FACEBOOK_URL,
+                               FACEBOOK_MARKET_PLACE_URL,
+                               emailSelector,
+                               EMAILID,
+                               passwordSelector,
+                               PASSWORD,
+                               facebookSigInButton,
+                               facebookMarketPlaceSelector,
+                               searchItemName,
+                               selectAllProductLink)
 
 from getDataFromProductLink import DataScraping
 
@@ -19,35 +28,35 @@ class WebScraping:
             
             await page.setViewport({ "width": 1080, "height": 1024 })
             
-            await page.goto(selectorName.facebookUrl)
+            await page.goto(FACEBOOK_URL)
             
-            await page.waitForSelector(selectorName.emailSelector)
+            await page.waitForSelector(emailSelector)
             
-            await page.type(selectorName.emailSelector , selectorName.emailId)
+            await page.type(emailSelector, EMAILID )
 
-            await page.type(selectorName.passwordSelector , selectorName.password)
+            await page.type(passwordSelector, PASSWORD)
 
-            await page.click(selectorName.facebookSigInButton)
+            await page.click(facebookSigInButton)
             
             await page.waitForNavigation()
             
-            await page.goto(selectorName.facebookMarketPlaceUrl)
+            await page.goto(FACEBOOK_MARKET_PLACE_URL)
             
             time.sleep(10)
             
-            await page.waitForSelector(selectorName.facebookMarketPlaceSelector)
+            await page.waitForSelector(facebookMarketPlaceSelector)
             
-            await page.type(selectorName.facebookMarketPlaceSelector , selectorName.searchItemName)
+            await page.type(facebookMarketPlaceSelector, searchItemName)
             
             await page.keyboard.press('Enter')
             
-            await GetProductTextOrHref().autoScroll(page , 20000)
+            await GetProductTextOrHref().autoScroll(page, 20000)
             
             time.sleep(10)
             
-            await page.waitForSelector(selectorName.selectAllProductLink)
+            await page.waitForSelector(selectAllProductLink)
             
-            productLinks = await GetProductTextOrHref().getHrefLink(page , selectorName.selectAllProductLink)
+            productLinks = await GetProductTextOrHref().getHrefLink(page, selectAllProductLink)
             
             time.sleep(5)
             
@@ -55,17 +64,13 @@ class WebScraping:
             
             for link in productLinks:
                 
-                newTab = await browser.newPage()
-                
-                advertisIndividualProductDetails = await DataScraping().getDataFromProductLink(newTab, link)
+                advertisIndividualProductDetails = await DataScraping().getDataFromProductLink(browser, link)
                 
                 advertisAllProductDetails.append(advertisIndividualProductDetails)
-                
-                
-            for data in advertisAllProductDetails:
-                print(data)
-            
+
             await browser.close()
+            
+            return advertisAllProductDetails
 
 
 

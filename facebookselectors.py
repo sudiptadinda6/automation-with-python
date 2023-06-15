@@ -1,14 +1,14 @@
-facebookUrl = 'https://www.facebook.com/'
+FACEBOOK_URL = 'https://www.facebook.com/'
 
-facebookMarketPlaceUrl = "https://www.facebook.com/marketplace/?ref=bookmark"
+FACEBOOK_MARKET_PLACE_URL = "https://www.facebook.com/marketplace/?ref=bookmark"
 
 emailSelector = '#email'
 
-emailId = "75#$%%^^gmail.com"
+EMAILID = "#$^&&**.com"
 
 passwordSelector = '#pass'
 
-password = "%%$%^^^^94@"
+PASSWORD = "#%^&&94@"
 
 facebookSigInButton = '[type="submit"]'
 

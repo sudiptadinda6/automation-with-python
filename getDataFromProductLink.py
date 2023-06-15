@@ -1,39 +1,45 @@
-import selectorName
+from facebookselectors import (productDetailsSelector,
+                               productPriceSelector,
+                               productAddressSelector,
+                               productAdvertisProfileLink,
+                               productAdvertisprofileName)
 
 from getHrefOrTextOfProductLink import GetProductTextOrHref
 
 class DataScraping:
 
-            async def getDataFromProductLink(self,newTab,link):
+            async def getDataFromProductLink(self, browser, link):
+                  
+                  newTab = await browser.newPage()
             
                   await newTab.goto(link)
                   
-                  await newTab.waitForSelector(selectorName.productDetailsSelector)
+                  await newTab.waitForSelector(productDetailsSelector)
                   
-                  advertisProductDetails = await GetProductTextOrHref().getInnerText(newTab , selectorName.productDetailsSelector)
+                  advertisProductDetails = await GetProductTextOrHref().getInnerText(newTab, productDetailsSelector)
                   
-                  await newTab.waitForSelector(selectorName.productPriceSelector)
+                  await newTab.waitForSelector(productPriceSelector)
                   
-                  advertisProductPrice = await GetProductTextOrHref().getInnerText(newTab , selectorName.productPriceSelector)
+                  advertisProductPrice = await GetProductTextOrHref().getInnerText(newTab, productPriceSelector)
                   
-                  await newTab.waitForSelector(selectorName.productAddressSelector)
+                  await newTab.waitForSelector(productAddressSelector)
                   
-                  advertisAddress = await GetProductTextOrHref().getInnerText(newTab , selectorName.productAddressSelector)
+                  advertisAddress = await GetProductTextOrHref().getInnerText(newTab, productAddressSelector)
                   
-                  await newTab.waitForSelector(selectorName.productAdvertisProfileLink)
+                  await newTab.waitForSelector(productAdvertisProfileLink)
                   
-                  advertisProfileLink = await GetProductTextOrHref().getHrefLink(newTab , selectorName.productAdvertisProfileLink)
+                  advertisProfileLink = await GetProductTextOrHref().getHrefLink(newTab, productAdvertisProfileLink)
                   
-                  await newTab.waitForSelector(selectorName.productAdvertisprofileName)
+                  await newTab.waitForSelector(productAdvertisprofileName)
                   
-                  avertisProfileName = await GetProductTextOrHref().getInnerText(newTab , selectorName.productAdvertisprofileName)
+                  avertisProfileName = await GetProductTextOrHref().getInnerText(newTab, productAdvertisprofileName)
                   
-                  avertisProductAllDetails ={
+                  avertisProductAllDetails = {
                   "detailes": advertisProductDetails[0],
-                  "price":advertisProductPrice[0],
+                  "price": advertisProductPrice[0],
                   "address": advertisAddress[0],
                   "profile_link": advertisProfileLink[0],
-                  "name":avertisProfileName[0]
+                  "name": avertisProfileName[0]
                   }
                   
                   await newTab.close()
