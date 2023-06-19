@@ -1,19 +1,19 @@
 import time
 
-from getHrefOrTextOfProductLink import GetProductTextOrHref
+from get_HrefOrText_OfProduct_Link import GetProductTextOrHref
 
-from facebookselectors import (FACEBOOK_URL,
-                               FACEBOOK_MARKET_PLACE_URL,
-                               emailSelector,
-                               EMAILID,
-                               passwordSelector,
-                               PASSWORD,
-                               facebookSigInButton,
-                               facebookMarketPlaceSelector,
-                               searchItemName,
-                               selectAllProductLink)
+from facebook_selectors import (FACEBOOK_URL,
+                                FACEBOOK_MARKET_PLACE_URL,
+                                EMAIL_SELECTOR,
+                                EMAILID,
+                                PASSWORD_SELECTOR,
+                                PASSWORD,
+                                FACEBOOK_SIGIN_BUTTON_SELECTOR,
+                                FACEBOOK_MARKETPLACE_SELECTOR,
+                                SEARCH_ITEM_NAME,
+                                SELECT_ALL_PRODUCT_LINK)
 
-from getDataFromProductLink import DataScraping
+from get_Data_From_Product_Link import DataScraping
 
 
 from pyppeteer import launch
@@ -30,13 +30,13 @@ class WebScraping:
             
             await page.goto(FACEBOOK_URL)
             
-            await page.waitForSelector(emailSelector)
+            await page.waitForSelector(EMAIL_SELECTOR)
             
-            await page.type(emailSelector, EMAILID )
+            await page.type(EMAIL_SELECTOR, EMAILID )
 
-            await page.type(passwordSelector, PASSWORD)
+            await page.type(PASSWORD_SELECTOR, PASSWORD)
 
-            await page.click(facebookSigInButton)
+            await page.click(FACEBOOK_SIGIN_BUTTON_SELECTOR)
             
             await page.waitForNavigation()
             
@@ -44,9 +44,9 @@ class WebScraping:
             
             time.sleep(10)
             
-            await page.waitForSelector(facebookMarketPlaceSelector)
+            await page.waitForSelector(FACEBOOK_MARKETPLACE_SELECTOR)
             
-            await page.type(facebookMarketPlaceSelector, searchItemName)
+            await page.type(FACEBOOK_MARKETPLACE_SELECTOR, SEARCH_ITEM_NAME)
             
             await page.keyboard.press('Enter')
             
@@ -54,9 +54,9 @@ class WebScraping:
             
             time.sleep(10)
             
-            await page.waitForSelector(selectAllProductLink)
+            await page.waitForSelector(SELECT_ALL_PRODUCT_LINK)
             
-            productLinks = await GetProductTextOrHref().getHrefLink(page, selectAllProductLink)
+            productLinks = await GetProductTextOrHref().getHrefLink(page, SELECT_ALL_PRODUCT_LINK)
             
             time.sleep(5)
             
